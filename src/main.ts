@@ -7,9 +7,6 @@ import type { Request, Response, NextFunction } from 'express';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port, '0.0.0.0');
-
   app.disable('x-powered-by');
 
   app.set('trust proxy', 1);
@@ -45,6 +42,9 @@ async function bootstrap() {
     res.setHeader('Cache-Control', 'no-store');
     next();
   });
+
+  const port = process.env.PORT || 3000;
+  await app.listen(port, '0.0.0.0');
 }
 
 void bootstrap();
