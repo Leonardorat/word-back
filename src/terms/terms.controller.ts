@@ -6,7 +6,7 @@ import { TermsService, TermDto } from './terms.service';
 export class TermsController {
   constructor(private readonly terms: TermsService) {}
 
-  @Throttle({ default: { limit: 20, ttl: 60_000 } })
+  @Throttle({ default: { limit: 2, ttl: 60_000 } })
   @Get('search')
   async search(@Query('q') q = ''): Promise<TermDto[]> {
     return this.terms.search(q);
